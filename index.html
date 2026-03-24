@@ -3,110 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wisema Radio | Streaming Digital</title>
+<title>Wisema Radio</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0b1e3c;
-    color: white;
-}
-
-header {
-    text-align: center;
-    padding: 40px 20px;
     background: linear-gradient(135deg, #0b3c7a, #001f3f);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-header p {
-    opacity: 0.8;
-    margin-top: 10px;
-}
-
-.section {
-    padding: 30px 20px;
+    color: white;
     text-align: center;
+}
+
+/* HEADER */
+.header {
+    padding: 30px 20px;
+}
+
+.header img {
+    width: 180px;
+}
+
+/* SECCIÓN */
+.section {
+    margin-top: 30px;
 }
 
 .card {
-    background: rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.6);
     padding: 20px;
-    border-radius: 15px;
-    margin: 15px auto;
-    max-width: 300px;
+    border-radius: 20px;
+    width: 300px;
+    margin: auto;
+    backdrop-filter: blur(10px);
 }
 
+/* LOGO EMISORA */
+.station-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* BOTÓN */
 .btn {
-    display: inline-block;
-    padding: 12px 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
     background: #1db954;
     color: white;
-    border-radius: 25px;
-    text-decoration: none;
-    margin-top: 15px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    background: #00152a;
-    font-size: 13px;
-    opacity: 0.7;
+/* REPRODUCTOR GLOBAL */
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #000;
+    padding: 10px;
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Wisema Radio</h1>
-    <p>Soluciones de Streaming Digital</p>
-</header>
-
-<div class="section">
-    <h2>¿Qué ofrecemos?</h2>
-
-    <div class="card">
-        <h3>📻 Streaming 24/7</h3>
-        <p>Transmite tu emisora en línea sin interrupciones.</p>
-    </div>
-
-    <div class="card">
-        <h3>🌐 Página Web</h3>
-        <p>Tu emisora con reproductor en línea listo para compartir.</p>
-    </div>
-
-    <div class="card">
-        <h3>📱 Aplicación Móvil</h3>
-        <p>App en Play Store para que te escuchen desde cualquier lugar.</p>
-    </div>
-
-    <a class="btn" href="https://wa.me/573232939258" target="_blank">
-        📲 Contáctanos por WhatsApp
-    </a>
+<!-- 🔥 LOGO PRINCIPAL -->
+<div class="header">
+    <img src="logo.png">
+    <h2>Soluciones de Streaming Digital</h2>
 </div>
 
+<!-- 🔥 EMISORAS -->
 <div class="section">
     <h2>Nuestras Emisoras</h2>
 
     <div class="card">
+        <img src="variadisima.png" class="station-logo">
+
         <h3>Variadisima Stereo</h3>
-        <a class="btn" href="https://variadisima.wisemaradio.com" target="_blank">
-            🎧 Escuchar
-        </a>
+
+        <button class="btn" onclick="playRadio(
+            'https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3',
+            'Variadisima Stereo',
+            'variadisima.png'
+        )">
+            ▶ Escuchar
+        </button>
     </div>
 
 </div>
 
-<div class="footer">
-    © 2026 Wisema Radio - Todos los derechos reservados
+<!-- 🔥 REPRODUCTOR GLOBAL -->
+<div class="player" id="player" style="display:none;">
+    <strong id="radioName"></strong><br>
+    <img id="radioLogo" style="width:50px;margin:5px;">
+    <br>
+    <audio id="audio" controls autoplay></audio>
 </div>
+
+<script>
+
+let audio = document.getElementById("audio");
+
+function playRadio(url, name, logo) {
+
+    audio.src = url;
+    audio.play();
+
+    document.getElementById("radioName").innerText = name;
+    document.getElementById("radioLogo").src = logo;
+
+    document.getElementById("player").style.display = "block";
+}
+
+</script>
 
 </body>
 </html>

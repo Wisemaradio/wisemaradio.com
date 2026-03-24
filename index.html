@@ -6,140 +6,172 @@
 <title>Wisema Radio</title>
 
 <style>
+
+/* 🎨 COLORES BASADOS EN TU MARCA */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0b3c7a, #001f3f);
+    background: linear-gradient(135deg, #0b3c7a, #00c853);
     color: white;
-    text-align: center;
 }
 
 /* HEADER */
 .header {
-    padding: 30px 20px;
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(0,0,0,0.3);
 }
 
 .header img {
-    width: 180px;
+    width: 160px;
 }
 
-/* SECCIÓN */
+/* SECCIONES */
 .section {
-    margin-top: 30px;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
 }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* TARJETAS */
 .card {
-    background: rgba(0,0,0,0.6);
+    background: rgba(255,255,255,0.1);
     padding: 20px;
-    border-radius: 20px;
-    width: 250px;
-    backdrop-filter: blur(10px);
-}
-
-/* LOGO EMISORA */
-.station-logo {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
     border-radius: 15px;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
-/* BOTÓN */
+/* 🎧 PANEL EMISORAS */
+.sidebar {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    padding: 15px;
+    border-radius: 15px 0 0 15px;
+}
+
+.station {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.station img {
+    width: 60px;
+    border-radius: 10px;
+}
+
 .btn {
-    width: 100%;
-    padding: 12px;
+    margin-top: 5px;
+    padding: 8px;
     border: none;
-    border-radius: 25px;
-    background: #1db954;
+    border-radius: 20px;
+    background: #00c853;
     color: white;
-    font-size: 14px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .btn:hover {
-    background: #17a74a;
+    background: #00a844;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 LOGO PRINCIPAL -->
+<!-- 🔥 HEADER -->
 <div class="header">
     <img src="logo.png">
-    <h2>Soluciones de Streaming Digital</h2>
+    <h1>Wisema Radio</h1>
+    <p>Soluciones de Streaming Digital</p>
 </div>
 
-<!-- 🔥 EMISORAS -->
+<!-- 🔥 PRESENTACIÓN -->
 <div class="section">
-    <h2>Nuestras Emisoras</h2>
-
-    <div class="cards">
-
-        <!-- 🔥 EMISORA 1 -->
-        <div class="card">
-            <img src="variadisima.png" class="station-logo">
-            <h3>Variadisima Stereo</h3>
-
-            <button class="btn" onclick="toggleRadio('variadisima')">
-                ▶ Escuchar
-            </button>
-        </div>
-
-        <!-- 🔥 EMISORA 2 (EJEMPLO) -->
-        <div class="card">
-            <img src="logo.png" class="station-logo">
-            <h3>Próxima Emisora</h3>
-
-            <button class="btn" onclick="toggleRadio('otra')">
-                ▶ Escuchar
-            </button>
-        </div>
-
+    <h2>Presentación</h2>
+    <div class="card">
+        Ofrecemos una solución integral para la creación y operación de emisoras digitales en línea, permitiendo transmitir contenido en vivo o programado las 24 horas con alcance global.
     </div>
 </div>
 
-<!-- 🎧 AUDIO OCULTO -->
+<!-- 🔥 SERVICIOS -->
+<div class="section">
+    <h2>¿Qué ofrecemos?</h2>
+
+    <div class="card">📻 Streaming 24/7 sin interrupciones</div>
+    <div class="card">🌐 Página web con reproductor integrado</div>
+    <div class="card">📱 Aplicación móvil en Play Store</div>
+    <div class="card">🎙 Software para transmisión en vivo</div>
+    <div class="card">📡 Publicación en plataformas de radio</div>
+    <div class="card">⚙ Control total de la emisora</div>
+</div>
+
+<!-- 🔥 BENEFICIOS -->
+<div class="section">
+    <h2>Beneficios</h2>
+
+    <div class="card">🌎 Alcance global</div>
+    <div class="card">📢 Mayor visibilidad</div>
+    <div class="card">🚀 Plataforma moderna</div>
+    <div class="card">⏱ Disponibilidad 24/7</div>
+</div>
+
+<!-- 🔥 CONTACTO -->
+<div class="section">
+    <h2>Contacto</h2>
+
+    <div class="card">
+        📲 WhatsApp: +57 323 293 9258 <br>
+        📧 Correo: wisema2@hotmail.com
+    </div>
+</div>
+
+<!-- 🎧 SIDEBAR EMISORAS -->
+<div class="sidebar">
+
+    <div class="station">
+        <img src="variadisima.png"><br>
+        <button class="btn" onclick="toggleRadio(this, 'variadisima')">
+            ▶
+        </button>
+    </div>
+
+</div>
+
+<!-- AUDIO -->
 <audio id="radio"></audio>
 
 <script>
 
 let radio = document.getElementById("radio");
 let actual = "";
+let btnActivo = null;
 
-// 🔥 PLAY / CAMBIO DE EMISORA
-function toggleRadio(nombre) {
+function toggleRadio(btn, nombre) {
 
-    let url = "";
+    let url = "https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3";
 
-    if (nombre === "variadisima") {
-        url = "https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3";
-    }
-
-    if (nombre === "otra") {
-        url = "https://otra.wisemaradio.com/listen/otra/radio.mp3";
-    }
-
-    // Si cambia de emisora
     if (actual !== nombre) {
+
         radio.src = url;
         radio.play();
+
+        if (btnActivo) btnActivo.innerHTML = "▶";
+
+        btn.innerHTML = "⏸";
+        btnActivo = btn;
         actual = nombre;
+
     } else {
-        // Toggle play/pausa
+
         if (radio.paused) {
             radio.play();
+            btn.innerHTML = "⏸";
         } else {
             radio.pause();
+            btn.innerHTML = "▶";
         }
     }
 }

@@ -29,7 +29,7 @@ body {
 }
 
 #intro img {
-    width: 260px;
+    width: 280px;
     animation: zoomOut 2s ease forwards;
 }
 
@@ -47,14 +47,14 @@ header {
     padding: 30px 20px;
 }
 
-/* LOGO PRINCIPAL */
+/* LOGO PRINCIPAL MÁS GRANDE */
 .logo-principal {
-    width: 200px;
+    width: 240px;
 }
 
 /* TITULO */
 .titulo {
-    font-size: 30px;
+    font-size: 32px;
     margin-top: 10px;
 }
 
@@ -77,46 +77,35 @@ header {
     opacity: 0.5;
 }
 
-/* EMISORA CENTRAL */
-.emisora-central {
-    margin-top: 40px;
-}
-
-.emisora-central img {
-    width: 180px;
-    border-radius: 15px;
-}
-
-/* BOTON */
-.player {
-    margin-top: 15px;
-}
-
-button {
-    background: #22c55e;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* SIDEBAR DERECHA */
+/* SIDEBAR DERECHA PRO */
 .sidebar {
     position: fixed;
     top: 50%;
-    right: 0;
+    right: 10px;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.4);
-    padding: 15px;
-    border-radius: 10px 0 0 10px;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+    width: 130px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
+/* LOGO EMISORA */
 .sidebar img {
-    width: 70px;
-    margin: 10px 0;
-    cursor: pointer;
+    width: 100%;
     border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* BOTON */
+.sidebar button {
+    width: 100%;
+    background: #22c55e;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 /* SECCIONES */
@@ -142,9 +131,13 @@ button {
     <img src="logo.png">
 </div>
 
-<!-- SIDEBAR -->
+<!-- SIDEBAR CON PLAYER -->
 <div class="sidebar">
-    <img src="variadisima.png" onclick="cambiarEmisora()">
+
+    <img src="variadisima.png">
+
+    <button onclick="togglePlay()" id="btn">▶️ Play</button>
+
 </div>
 
 <header>
@@ -166,17 +159,6 @@ button {
     </div>
 
 </header>
-
-<!-- EMISORA CENTRAL -->
-<div class="emisora-central">
-
-    <img src="variadisima.png">
-
-    <div class="player">
-        <button onclick="togglePlay()" id="btn">▶️ Reproducir</button>
-    </div>
-
-</div>
 
 <div class="seccion">
     <h2>Presentación</h2>
@@ -201,25 +183,16 @@ let audio = document.getElementById("audio");
 let btn = document.getElementById("btn");
 let playing = false;
 
-// PLAY / PAUSE
 function togglePlay() {
     if (!playing) {
         audio.play();
-        btn.innerHTML = "⏸️ Pausar";
+        btn.innerHTML = "⏸️ Pause";
         playing = true;
     } else {
         audio.pause();
-        btn.innerHTML = "▶️ Reproducir";
+        btn.innerHTML = "▶️ Play";
         playing = false;
     }
-}
-
-// CAMBIAR EMISORA (MISMA POR AHORA)
-function cambiarEmisora() {
-    audio.src = "https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3";
-    audio.play();
-    btn.innerHTML = "⏸️ Pausar";
-    playing = true;
 }
 </script>
 

@@ -29,7 +29,7 @@ body {
 }
 
 #intro img {
-    width: 250px;
+    width: 260px;
     animation: zoomOut 2s ease forwards;
 }
 
@@ -44,18 +44,18 @@ body {
 
 /* HEADER */
 header {
-    padding: 40px 20px;
+    padding: 30px 20px;
 }
 
-/* LOGO GRANDE */
-.logo {
-    width: 160px;
+/* LOGO PRINCIPAL */
+.logo-principal {
+    width: 200px;
 }
 
 /* TITULO */
 .titulo {
     font-size: 30px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 /* FRASE */
@@ -77,39 +77,46 @@ header {
     opacity: 0.5;
 }
 
-/* PLAYER */
+/* EMISORA CENTRAL */
+.emisora-central {
+    margin-top: 40px;
+}
+
+.emisora-central img {
+    width: 180px;
+    border-radius: 15px;
+}
+
+/* BOTON */
 .player {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 button {
     background: #22c55e;
     border: none;
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 12px 25px;
+    font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
 }
 
-/* PANEL LATERAL */
+/* SIDEBAR DERECHA */
 .sidebar {
     position: fixed;
     top: 50%;
-    left: 0;
+    right: 0;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.3);
-    padding: 10px;
-    border-radius: 0 10px 10px 0;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 10px 0 0 10px;
 }
 
-.emisora {
+.sidebar img {
+    width: 70px;
     margin: 10px 0;
     cursor: pointer;
-}
-
-.emisora img {
-    width: 50px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 /* SECCIONES */
@@ -135,15 +142,14 @@ button {
     <img src="logo.png">
 </div>
 
-<!-- SIDEBAR EMISORAS -->
+<!-- SIDEBAR -->
 <div class="sidebar">
-    <div class="emisora" onclick="cambiarEmisora('https://TU_STREAM_AQUI')">
-        <img src="logo.png">
-    </div>
+    <img src="variadisima.png" onclick="cambiarEmisora()">
 </div>
 
 <header>
-    <img src="logo.png" class="logo">
+
+    <img src="logo.png" class="logo-principal">
 
     <div class="titulo">
         Soluciones de Streaming Digital
@@ -159,11 +165,18 @@ button {
         <div></div>
     </div>
 
+</header>
+
+<!-- EMISORA CENTRAL -->
+<div class="emisora-central">
+
+    <img src="variadisima.png">
+
     <div class="player">
         <button onclick="togglePlay()" id="btn">▶️ Reproducir</button>
     </div>
 
-</header>
+</div>
 
 <div class="seccion">
     <h2>Presentación</h2>
@@ -181,13 +194,14 @@ button {
 
 </div>
 
-<audio id="audio" src="https://TU_STREAM_AQUI"></audio>
+<audio id="audio" src="https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3"></audio>
 
 <script>
 let audio = document.getElementById("audio");
 let btn = document.getElementById("btn");
 let playing = false;
 
+// PLAY / PAUSE
 function togglePlay() {
     if (!playing) {
         audio.play();
@@ -200,8 +214,9 @@ function togglePlay() {
     }
 }
 
-function cambiarEmisora(url) {
-    audio.src = url;
+// CAMBIAR EMISORA (MISMA POR AHORA)
+function cambiarEmisora() {
+    audio.src = "https://variadisima.wisemaradio.com/listen/variadisima/radio.mp3";
     audio.play();
     btn.innerHTML = "⏸️ Pausar";
     playing = true;

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wisema Radio - Streaming Digital</title>
+
+<!-- SEO -->
+<title>Streaming para Radio | Wisema Radio</title>
+<meta name="description" content="Servicio profesional de streaming para emisoras de radio. Transmisión 24/7 sin interrupciones, páginas web y apps móviles.">
+<meta name="keywords" content="streaming radio, radio online, emisoras, streaming colombia">
+<meta name="author" content="Wisema Radio">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -28,7 +35,7 @@ body {
 }
 
 #intro img {
-    width: 220px;
+    width: 280px;
     animation: zoomIn 2s ease forwards;
 }
 
@@ -51,22 +58,19 @@ body {
 }
 
 .hero img {
-    width: 140px;
+    width: 180px;
     margin-bottom: 20px;
-    opacity: 0.95;
 }
 
 .hero h1 {
-    font-size: 42px;
-    margin: 10px 0;
+    font-size: 44px;
 }
 
 .hero p {
-    font-size: 18px;
-    margin: 15px 0;
     color: #ccc;
 }
 
+/* BOTÓN */
 .btn {
     background: #00ffcc;
     padding: 12px 25px;
@@ -86,36 +90,42 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
     gap: 20px;
-    margin-top: 30px;
 }
 
 .card {
     background: #12182b;
     padding: 25px;
     border-radius: 10px;
-    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
+/* PLANES */
+.planes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
 }
 
-/* BLOQUE IMAGEN */
-.split {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.split img {
-    width: 100%;
-    max-width: 500px;
+.plan {
+    background: #12182b;
+    padding: 30px;
     border-radius: 10px;
 }
 
-.split div {
-    flex: 1;
-    padding: 20px;
+.plan h3 {
+    color: #00ffcc;
+}
+
+/* WHATSAPP FLOTANTE */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    font-size: 20px;
+    padding: 15px 18px;
+    border-radius: 50%;
+    text-decoration: none;
 }
 
 /* CONTACTO */
@@ -130,15 +140,15 @@ body {
 
 <body>
 
-<!-- INTRO CON LOGO -->
+<!-- INTRO -->
 <div id="intro">
-    <img src="logo.png" alt="Wisema Radio">
+    <img src="logo.png">
 </div>
 
 <!-- HERO -->
 <section class="hero">
     <div>
-        <img src="logo.png" alt="Wisema Radio">
+        <img src="logo.png">
         <h1>Streaming Profesional para Radio</h1>
         <p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
         <a href="#contacto" class="btn">Solicitar Servicio</a>
@@ -149,21 +159,39 @@ body {
 <section class="section">
     <h2>¿Qué ofrecemos?</h2>
     <div class="cards">
-        <div class="card">📡 Streaming 24/7 sin interrupciones</div>
-        <div class="card">🌐 Página web con reproductor integrado</div>
-        <div class="card">📱 Aplicación móvil (Android)</div>
-        <div class="card">📻 Integración con MyTuner y plataformas</div>
+        <div class="card">📡 Streaming 24/7</div>
+        <div class="card">🌐 Página web incluida</div>
+        <div class="card">📱 App Android</div>
+        <div class="card">📻 MyTuner y más</div>
     </div>
 </section>
 
-<!-- BLOQUE VISUAL -->
-<section class="section split">
-    <div>
-        <h2>Transmisión estable y profesional</h2>
-        <p>Alta calidad de audio, estabilidad garantizada y compatibilidad con todas las plataformas digitales.</p>
-    </div>
-    <div>
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4">
+<!-- PLANES -->
+<section class="section">
+    <h2>Planes de Streaming</h2>
+    <div class="planes">
+
+        <div class="plan">
+            <h3>Básico</h3>
+            <p>$50.000 / mes</p>
+            <p>Streaming estable</p>
+            <p>Soporte básico</p>
+        </div>
+
+        <div class="plan">
+            <h3>Profesional</h3>
+            <p>$80.000 / mes</p>
+            <p>Streaming + Web</p>
+            <p>Soporte prioritario</p>
+        </div>
+
+        <div class="plan">
+            <h3>Premium</h3>
+            <p>$120.000 / mes</p>
+            <p>Todo incluido</p>
+            <p>App + Web + Streaming</p>
+        </div>
+
     </div>
 </section>
 
@@ -171,8 +199,11 @@ body {
 <section class="contact" id="contacto">
     <h2>Contáctanos</h2>
     <p>Solicita tu servicio de streaming hoy mismo</p>
-    <a class="btn" href="https://wa.me/573244484975">WhatsApp</a>
+    <a class="btn" href="https://wa.me/573244484975">Escribir por WhatsApp</a>
 </section>
+
+<!-- BOTÓN FLOTANTE -->
+<a href="https://wa.me/573244484975" class="whatsapp">💬</a>
 
 <script>
 setTimeout(() => {

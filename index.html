@@ -5,24 +5,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO AVANZADO -->
-<title>Streaming Profesional para Radio | Wisema Radio Colombia</title>
+<!-- SEO PRO -->
+<title>Streaming para Radio en Colombia | Wisema Radio</title>
 
-<meta name="description" content="Servicio profesional de streaming para emisoras de radio en Colombia. Transmisión 24/7 sin interrupciones, páginas web, apps móviles y presencia en plataformas digitales.">
-<meta name="keywords" content="streaming radio colombia, radio online, emisoras en vivo, servidor streaming radio, crear emisora online">
+<meta name="description" content="Servicio profesional de streaming para emisoras de radio en Colombia. Transmisión estable 24/7, páginas web, apps móviles y posicionamiento digital.">
+<meta name="keywords" content="streaming radio colombia, emisora online, servidor radio, crear radio online, streaming profesional radio">
 <meta name="author" content="Wisema Radio">
 <meta name="robots" content="index, follow">
 
-<!-- Open Graph (Facebook / WhatsApp) -->
-<meta property="og:title" content="Wisema Radio - Streaming Profesional">
-<meta property="og:description" content="Conecta tu emisora con el mundo 24/7 sin interrupciones.">
+<!-- Open Graph -->
+<meta property="og:title" content="Wisema Radio Streaming Profesional">
+<meta property="og:description" content="Conecta tu emisora con el mundo sin interrupciones">
 <meta property="og:image" content="logo.png">
 <meta property="og:type" content="website">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wisema Radio Streaming">
-<meta name="twitter:description" content="Streaming profesional para emisoras de radio">
+
+<!-- SCHEMA SEO -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "name": "Wisema Radio",
+ "description": "Streaming profesional para emisoras de radio",
+ "areaServed": "Colombia",
+ "url": "https://wisemaradio.com"
+}
+</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -48,7 +58,7 @@ body {
 }
 
 #intro img {
-    width: 300px;
+    width: 320px;
     animation: zoomIn 2s ease forwards;
 }
 
@@ -60,7 +70,7 @@ body {
 /* HERO */
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)),
     url('emisora.png');
     background-size: cover;
     background-position: center;
@@ -71,23 +81,25 @@ body {
 }
 
 .hero img {
-    width: 220px;
-    margin-bottom: 20px;
+    width: 260px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 15px rgba(0,255,200,0.3));
 }
 
 .hero h1 {
-    font-size: 46px;
+    font-size: 48px;
 }
 
 .hero p {
     color: #ccc;
+    font-size: 18px;
 }
 
 /* BOTÓN */
 .btn {
     background: #00ffcc;
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 14px 28px;
+    border-radius: 6px;
     color: black;
     text-decoration: none;
     font-weight: bold;
@@ -113,12 +125,12 @@ body {
 }
 
 .box:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .box img {
     width: 100%;
-    height: 170px;
+    height: 180px;
     object-fit: cover;
 }
 
@@ -156,16 +168,16 @@ body {
     text-align: center;
 }
 
-/* WHATSAPP */
+/* WHATSAPP PERSONALIZADO */
 .whatsapp {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #25D366;
-    padding: 15px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 20px;
+}
+
+.whatsapp img {
+    width: 60px;
+    height: 60px;
 }
 
 </style>
@@ -248,11 +260,13 @@ body {
 <section class="contact" id="contacto">
     <h2>Contáctanos</h2>
     <p>Solicita tu servicio de streaming hoy mismo</p>
-    <a class="btn" href="https://wa.me/573244484975">WhatsApp</a>
+    <a class="btn" href="https://wa.me/573244484975">Escribir por WhatsApp</a>
 </section>
 
-<!-- BOTÓN -->
-<a href="https://wa.me/573244484975" class="whatsapp">💬</a>
+<!-- BOTÓN WHATSAPP -->
+<a href="https://wa.me/573244484975" class="whatsapp">
+    <img src="WhatsApp.png">
+</a>
 
 <script>
 setTimeout(() => {

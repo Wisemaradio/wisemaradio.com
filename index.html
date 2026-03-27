@@ -1,121 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Streaming para Radio en Colombia | Wisema Radio</title>
+<title>Streaming para Radio Online | Wisema Radio</title>
 
-<meta name="description" content="Servicio profesional de streaming para emisoras de radio en Colombia. Transmisión estable 24/7.">
-<meta name="keywords" content="streaming radio colombia, emisora online, servidor radio">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Servicio profesional de streaming para emisoras online. Transmite tu radio 24/7 con estabilidad y presencia global.">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- SEO -->
+<meta name="keywords" content="streaming radio, radio online, emisoras en vivo, servidor streaming, radio internet Colombia">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="favicon-192.png">
+<link rel="manifest" href="manifest.json">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Wisema Radio Streaming">
+<meta property="og:description" content="Streaming profesional para emisoras online 24/7">
+<meta property="og:image" content="https://wisemaradio.com/logo.png">
+<meta property="og:url" content="https://wisemaradio.com">
+
+<!-- Google Logo SEO -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "Wisema Radio",
+ "url": "https://wisemaradio.com",
+ "logo": "https://wisemaradio.com/favicon-192.png"
+}
+</script>
 
 <style>
 
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #0b0f1a;
-    color: white;
-}
-
-/* INTRO */
-#intro {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: #0b0f1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-#intro img {
-    width: 320px;
-    animation: zoomIn 2s ease forwards;
-}
-
-@keyframes zoomIn {
-    0% {transform: scale(0.5);}
-    100% {transform: scale(1);}
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0a0f1c;
+color:#fff;
 }
 
 /* HERO */
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)),
-    url('emisora.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.hero{
+height:100vh;
+background:url('emisora.png') center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-.hero img {
-    width: 260px;
+.hero img{
+width:260px;
+margin-bottom:20px;
 }
 
-/* BOTÓN */
-.btn {
-    background: #00ffcc;
-    padding: 14px 28px;
-    border-radius: 6px;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
+.hero h1{
+font-size:40px;
+margin:10px 0;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.btn{
+background:#00ffc3;
+padding:12px 25px;
+color:#000;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
 }
 
 /* SERVICIOS */
-.services {
-    padding: 60px 20px;
-    text-align: center;
+.servicios{
+padding:50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap: 20px;
+.card{
+background:#111827;
+border-radius:10px;
+padding:20px;
+text-align:center;
 }
 
-.box {
-    background: #12182b;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.box img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.card img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
 }
 
 /* PLANES */
-.plan-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap: 20px;
+.planes{
+padding:50px;
+text-align:center;
 }
 
-.plan {
-    background: #12182b;
-    padding: 30px;
+.plan{
+background:#111827;
+padding:20px;
+border-radius:10px;
+margin:10px;
+display:inline-block;
+width:250px;
 }
 
 /* WHATSAPP */
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
 }
 
-.whatsapp img {
-    width: 60px;
+.whatsapp img{
+width:60px;
 }
 
 </style>
@@ -123,88 +130,68 @@ body {
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-    <img src="logo.png">
-</div>
-
 <!-- HERO -->
 <section class="hero">
-    <div>
-        <img src="logo.png">
-        <h1>Streaming Profesional para Radio</h1>
-        <p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
-        <a href="#contacto" class="btn">Solicitar Servicio</a>
-    </div>
+<img src="logo.png">
+<h1>Streaming Profesional para Radio</h1>
+<p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
+<button class="btn">Solicitar Servicio</button>
 </section>
 
 <!-- SERVICIOS -->
-<section class="services">
-    <h2>¿Qué ofrecemos?</h2>
+<section class="servicios">
 
-    <div class="grid">
+<div class="card">
+<img src="straeming.png">
+<h3>Streaming 24/7</h3>
+<p>Transmisión estable todo el tiempo</p>
+</div>
 
-        <div class="box">
-            <img src="straeming.png">
-            <h3>Streaming 24/7</h3>
-        </div>
+<div class="card">
+<img src="pagina.png">
+<h3>Página web incluida</h3>
+<p>Diseño profesional con reproductor</p>
+</div>
 
-        <div class="box">
-            <img src="pagina.png">
-            <h3>Página web incluida</h3>
-        </div>
+<div class="card">
+<img src="app.png">
+<h3>App Android</h3>
+<p>Tu emisora en Play Store</p>
+</div>
 
-        <div class="box">
-            <img src="app.png">
-            <h3>App Android</h3>
-        </div>
+<div class="card">
+<img src="plataforma.png">
+<h3>Presencia en plataformas</h3>
+<p>Disponible en todas las apps de radio</p>
+</div>
 
-        <div class="box">
-            <img src="plataforma.png">
-            <h3>Presencia en todas las plataformas</h3>
-        </div>
-
-    </div>
 </section>
 
 <!-- PLANES -->
-<section>
-    <h2 style="text-align:center;">Planes</h2>
+<section class="planes">
+<h2>Planes de Streaming</h2>
 
-    <div class="plan-grid">
-        <div class="plan">
-            <h3>Básico</h3>
-            <p>Streaming estable</p>
-        </div>
+<div class="plan">
+<h3>Básico</h3>
+<p>Streaming estable</p>
+</div>
 
-        <div class="plan">
-            <h3>Profesional</h3>
-            <p>Streaming + Web</p>
-        </div>
+<div class="plan">
+<h3>Profesional</h3>
+<p>Streaming + Web</p>
+</div>
 
-        <div class="plan">
-            <h3>Premium</h3>
-            <p>Todo incluido</p>
-        </div>
-    </div>
+<div class="plan">
+<h3>Premium</h3>
+<p>Todo incluido</p>
+</div>
+
 </section>
 
-<!-- CONTACTO -->
-<section id="contacto" style="text-align:center; padding:40px;">
-    <h2>Contáctanos</h2>
-    <a class="btn" href="https://wa.me/573244484975">WhatsApp</a>
-</section>
-
-<!-- BOTÓN -->
-<a href="https://wa.me/573244484975" class="whatsapp">
-    <img src="Whatsapp.png">
+<!-- WHATSAPP -->
+<a href="https://wa.me/573244484975" class="whatsapp" target="_blank">
+<img src="WhatsApp.png">
 </a>
-
-<script>
-setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-}, 2500);
-</script>
 
 </body>
 </html>

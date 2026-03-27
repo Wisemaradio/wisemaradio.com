@@ -9,29 +9,39 @@
 <meta name="description" content="Servicio profesional de streaming para emisoras online. Transmite tu radio 24/7 con estabilidad y presencia global.">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
-<link rel="manifest" href="manifest.json">
-
-<!-- SEO Google -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "Wisema Radio",
- "url": "https://wisemaradio.com",
- "logo": "https://wisemaradio.com/favicon-192.png"
-}
-</script>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial, sans-serif;
+font-family:Arial;
 background:#0a0f1c;
 color:#fff;
+overflow-x:hidden;
+}
+
+/* INTRO */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+#intro img{
+width:220px;
+animation:zoomIntro 3s ease forwards;
+}
+
+@keyframes zoomIntro{
+0%{transform:scale(0.2); opacity:0;}
+100%{transform:scale(1.6); opacity:1;}
 }
 
 /* HERO */
@@ -49,12 +59,9 @@ text-align:center;
 .hero::before{
 content:"";
 position:absolute;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.6);
-z-index:1;
 }
 
 .hero *{
@@ -62,21 +69,13 @@ position:relative;
 z-index:2;
 }
 
-/* LOGO ANIMACIÓN */
-@keyframes zoomLogo {
-  0% {transform: scale(0.5); opacity: 0;}
-  100% {transform: scale(1); opacity: 1;}
-}
-
-.logo-animado{
-width:220px;
+.hero img{
+width:380px;
 margin-bottom:20px;
-animation: zoomLogo 1.5s ease;
 }
 
 .hero h1{
 font-size:40px;
-margin:10px 0;
 }
 
 .hero p{
@@ -86,11 +85,9 @@ font-size:18px;
 .btn{
 background:#00ffc3;
 padding:12px 25px;
-color:#000;
-border:none;
 border-radius:8px;
+border:none;
 cursor:pointer;
-margin-top:20px;
 }
 
 /* SERVICIOS */
@@ -106,11 +103,6 @@ background:#111827;
 border-radius:10px;
 padding:20px;
 text-align:center;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
 }
 
 .card img{
@@ -143,13 +135,7 @@ z-index:999;
 }
 
 .whatsapp img{
-width:60px;
-}
-
-/* BOTÓN CONTACTO */
-.contacto{
-text-align:center;
-padding:30px;
+width:65px;
 }
 
 </style>
@@ -157,9 +143,14 @@ padding:30px;
 
 <body>
 
+<!-- INTRO -->
+<div id="intro">
+<img src="logo.png">
+</div>
+
 <!-- HERO -->
 <section class="hero">
-<img src="logo.png" class="logo-animado">
+<img src="logo.png">
 <h1>Streaming Profesional para Radio</h1>
 <p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
 <button class="btn">Solicitar Servicio</button>
@@ -175,13 +166,13 @@ padding:30px;
 </div>
 
 <div class="card">
-<img src="página.png">
+<img src="pagina.png">
 <h3>Página web incluida</h3>
 <p>Diseño profesional con reproductor</p>
 </div>
 
 <div class="card">
-<img src="aplicación.png">
+<img src="aplicacion.png">
 <h3>App Android</h3>
 <p>Tu emisora en Play Store</p>
 </div>
@@ -215,18 +206,17 @@ padding:30px;
 
 </section>
 
-<!-- CONTACTO -->
-<section class="contacto">
-<h2>Contáctanos</h2>
-<a href="https://wa.me/573244484975">
-<button class="btn">WhatsApp</button>
-</a>
-</section>
-
-<!-- BOTÓN FLOTANTE -->
+<!-- WHATSAPP -->
 <a href="https://wa.me/573244484975" class="whatsapp" target="_blank">
-<img src="WhatsApp.png" alt="WhatsApp">
+<img src="WhatsApp.png">
 </a>
+
+<!-- SCRIPT -->
+<script>
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+},3000);
+</script>
 
 </body>
 </html>

@@ -8,22 +8,13 @@
 
 <meta name="description" content="Servicio profesional de streaming para emisoras online. Transmite tu radio 24/7 con estabilidad y presencia global.">
 
-<!-- SEO -->
-<meta name="keywords" content="streaming radio, radio online, emisoras en vivo, servidor streaming, radio internet Colombia">
-
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
 <link rel="manifest" href="manifest.json">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Wisema Radio Streaming">
-<meta property="og:description" content="Streaming profesional para emisoras online 24/7">
-<meta property="og:image" content="https://wisemaradio.com/logo.png">
-<meta property="og:url" content="https://wisemaradio.com">
-
-<!-- Google Logo SEO -->
+<!-- SEO Google -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -45,6 +36,7 @@ color:#fff;
 
 /* HERO */
 .hero{
+position:relative;
 height:100vh;
 background:url('emisora.png') center/cover no-repeat;
 display:flex;
@@ -54,9 +46,32 @@ align-items:center;
 text-align:center;
 }
 
-.hero img{
-width:260px;
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:1;
+}
+
+.hero *{
+position:relative;
+z-index:2;
+}
+
+/* LOGO ANIMACIÓN */
+@keyframes zoomLogo {
+  0% {transform: scale(0.5); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}
+
+.logo-animado{
+width:220px;
 margin-bottom:20px;
+animation: zoomLogo 1.5s ease;
 }
 
 .hero h1{
@@ -91,6 +106,11 @@ background:#111827;
 border-radius:10px;
 padding:20px;
 text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
 }
 
 .card img{
@@ -119,10 +139,17 @@ width:250px;
 position:fixed;
 bottom:20px;
 right:20px;
+z-index:999;
 }
 
 .whatsapp img{
 width:60px;
+}
+
+/* BOTÓN CONTACTO */
+.contacto{
+text-align:center;
+padding:30px;
 }
 
 </style>
@@ -132,7 +159,7 @@ width:60px;
 
 <!-- HERO -->
 <section class="hero">
-<img src="logo.png">
+<img src="logo.png" class="logo-animado">
 <h1>Streaming Profesional para Radio</h1>
 <p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
 <button class="btn">Solicitar Servicio</button>
@@ -142,19 +169,19 @@ width:60px;
 <section class="servicios">
 
 <div class="card">
-<img src="straeming.png">
+<img src="streaming.png">
 <h3>Streaming 24/7</h3>
 <p>Transmisión estable todo el tiempo</p>
 </div>
 
 <div class="card">
-<img src="pagina.png">
+<img src="página.png">
 <h3>Página web incluida</h3>
 <p>Diseño profesional con reproductor</p>
 </div>
 
 <div class="card">
-<img src="app.png">
+<img src="aplicación.png">
 <h3>App Android</h3>
 <p>Tu emisora en Play Store</p>
 </div>
@@ -188,9 +215,17 @@ width:60px;
 
 </section>
 
-<!-- WHATSAPP -->
+<!-- CONTACTO -->
+<section class="contacto">
+<h2>Contáctanos</h2>
+<a href="https://wa.me/573244484975">
+<button class="btn">WhatsApp</button>
+</a>
+</section>
+
+<!-- BOTÓN FLOTANTE -->
 <a href="https://wa.me/573244484975" class="whatsapp" target="_blank">
-<img src="WhatsApp.png">
+<img src="WhatsApp.png" alt="WhatsApp">
 </a>
 
 </body>

@@ -8,7 +8,6 @@
 
 <meta name="description" content="Servicio profesional de streaming para emisoras online. Transmite tu radio 24/7 con estabilidad y presencia global.">
 
-<!-- Favicon -->
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
 
@@ -117,6 +116,11 @@ padding:50px;
 text-align:center;
 }
 
+.logo-plan{
+width:120px;
+margin-bottom:10px;
+}
+
 .plan{
 background:#111827;
 padding:20px;
@@ -124,6 +128,12 @@ border-radius:10px;
 margin:10px;
 display:inline-block;
 width:250px;
+}
+
+.plan img{
+width:100%;
+margin-top:10px;
+border-radius:8px;
 }
 
 /* WHATSAPP */
@@ -187,21 +197,27 @@ width:65px;
 
 <!-- PLANES -->
 <section class="planes">
+
+<img src="logosolo.png" class="logo-plan">
+
 <h2>Planes de Streaming</h2>
 
 <div class="plan">
 <h3>Básico</h3>
 <p>Streaming estable</p>
+<img src="micro.png">
 </div>
 
 <div class="plan">
 <h3>Profesional</h3>
 <p>Streaming + Web</p>
+<img src="midiendo.png">
 </div>
 
 <div class="plan">
 <h3>Premium</h3>
 <p>Todo incluido</p>
+<img src="premium.png">
 </div>
 
 </section>
@@ -211,7 +227,6 @@ width:65px;
 <img src="WhatsApp.png">
 </a>
 
-<!-- SCRIPT -->
 <script>
 setTimeout(()=>{
 document.getElementById("intro").style.display="none";

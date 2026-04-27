@@ -2,26 +2,32 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Wisema Radio Streaming Digital</title>
 
-<title>Streaming para Radio Online | Wisema Radio</title>
-
-<meta name="description" content="Servicio profesional de streaming para emisoras online. Transmite tu radio 24/7 con estabilidad y presencia global.">
+<meta name="description"
+content="Infraestructura profesional de streaming para emisoras, iglesias, empresas e instituciones.">
 
 <link rel="icon" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon-192.png">
 
 <style>
 
+*{
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:#0a0f1c;
-color:#fff;
+color:white;
 overflow-x:hidden;
 }
 
-/* INTRO */
+
+/* ================= INTRO ORIGINAL ================= */
+
 #intro{
 position:fixed;
 width:100%;
@@ -30,7 +36,7 @@ background:#000;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:9999;
+z-index:99999;
 }
 
 #intro img{
@@ -39,11 +45,53 @@ animation:zoomIntro 3s ease forwards;
 }
 
 @keyframes zoomIntro{
-0%{transform:scale(0.2); opacity:0;}
-100%{transform:scale(1.6); opacity:1;}
+0%{
+transform:scale(.2);
+opacity:0;
+}
+100%{
+transform:scale(1.6);
+opacity:1;
+}
 }
 
-/* HERO */
+
+/* ================= MENU ================= */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:15px;
+display:flex;
+justify-content:center;
+gap:30px;
+background:rgba(8,12,25,.80);
+backdrop-filter:blur(8px);
+z-index:5000;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00ffd0;
+}
+
+.pdf-btn{
+background:#00ffc3;
+color:#000;
+padding:11px 18px;
+border-radius:9px;
+}
+
+
+/* ================= HERO (SE CONSERVA) ================= */
+
 .hero{
 position:relative;
 height:100vh;
@@ -60,7 +108,7 @@ content:"";
 position:absolute;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,.6); /* misma opacidad */
 }
 
 .hero *{
@@ -70,82 +118,330 @@ z-index:2;
 
 .hero img{
 width:380px;
-margin-bottom:20px;
+max-width:90%;
+margin-bottom:25px;
 }
 
 .hero h1{
-font-size:40px;
+font-size:58px;
+max-width:900px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:22px;
+max-width:780px;
+line-height:1.7;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:15px 35px;
+background:#00ffc3;
+color:#000;
+border-radius:12px;
+font-weight:bold;
+text-decoration:none;
+}
+
+
+/* ================= SERVICIOS (TU ORIGINAL) ================= */
+
+.servicios{
+padding:80px 50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:#111827;
+border-radius:18px;
+padding:22px;
+text-align:center;
+position:relative;
+overflow:hidden;
+transition:.45s ease;
+box-shadow:
+0 0 10px rgba(0,170,255,.10),
+0 0 14px rgba(0,255,170,.08);
+}
+
+/* borde animado */
+.card::before{
+content:"";
+position:absolute;
+inset:-2px;
+
+background:linear-gradient(
+90deg,
+#00a8ff,
+#00ff95,
+#00a8ff,
+#00ff95
+);
+
+background-size:300% 300%;
+border-radius:20px;
+animation:borderFlow 7s linear infinite;
+z-index:-2;
+}
+
+/* fondo interior */
+.card::after{
+content:"";
+position:absolute;
+inset:2px;
+background:#111827;
+border-radius:16px;
+z-index:-1;
+}
+
+/* hover */
+.card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:
+0 0 28px rgba(0,255,170,.28),
+0 0 40px rgba(0,180,255,.18);
+}
+
+.card:hover::before{
+animation:borderFlow 2s linear infinite;
+filter:brightness(1.3);
+}
+
+/* imagen */
+.card img{
+width:100%;
+border-radius:12px;
+margin-bottom:14px;
+transition:.45s;
+}
+
+.card:hover img{
+transform:scale(1.06);
+}
+
+.card h3{
+transition:.3s;
+}
+
+.card:hover h3{
+color:#00ffd0;
+}
+
+/* ================= SECCIONES ================= */
+
+.section{
+padding:90px 10%;
+}
+
+.section h2{
+text-align:center;
+font-size:48px;
+margin-bottom:60px;
+}
+
+.valores{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+}
+
+
+/*======== TARJETAS CORPORATIVAS ========*/
+
+.box{
+position:relative;
+background:#111827;
+padding:38px 32px;
+border-radius:22px;
+overflow:hidden;
+transition:.45s;
+}
+
+/* borde animado azul + verde */
+.box::before{
+content:"";
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:22px;
+background:linear-gradient(
+90deg,
+#00b7ff,
+#00ff95,
+#00b7ff
+);
+background-size:300% 300%;
+animation:borderMove 6s linear infinite;
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+}
+
+@keyframes borderMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* hover elegante */
+.box:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:
+0 0 20px rgba(0,255,170,.28),
+0 0 45px rgba(0,170,255,.18);
+}
+
+/* TODOS LOS TITULOS CENTRADOS */
+.box h3{
+font-size:31px;
+font-weight:700;
+margin-bottom:24px;
+text-align:center;
+line-height:1.25;
+transition:.4s;
+}
+
+/* gradiente en hover */
+.box:hover h3{
+background:linear-gradient(
+90deg,
+#00a8ff,
+#00ff95
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* textos descriptivos se quedan alineados izquierda */
+.box p{
+font-size:18px;
+line-height:1.9;
+text-align:left;
+}
+
+/* lista valores */
+.box ul{
+padding-left:24px;
+line-height:2;
+font-size:18px;
+}
+
+.box li{
+margin-bottom:8px;
+}
+
+/* responsive */
+@media(max-width:768px){
+
+.box{
+padding:30px 24px;
+}
+
+.box h3{
+font-size:26px;
+}
+
+.box p,
+.box ul{
+font-size:16px;
+}
+
+}
+
+
+/* ================= PORTAFOLIO ================= */
+
+.portafolio{
+padding:90px 20px;
+text-align:center;
+background:#111827;
+}
+
+.portafolio h2{
+font-size:46px;
+}
+
+.download{
+display:inline-block;
+margin-top:25px;
+background:#00ffc3;
+padding:16px 35px;
+border-radius:12px;
+font-weight:bold;
+color:#000;
+text-decoration:none;
+}
+
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp{
+position:fixed;
+right:25px;
+bottom:25px;
+z-index:999;
+animation:pulse 2s infinite;
+}
+
+.whatsapp img{
+width:70px;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.1);
+}
+}
+
+.bubble{
+position:fixed;
+right:105px;
+bottom:40px;
+background:#25d366;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 0 20px rgba(0,0,0,.35);
+animation:float 4s infinite;
+z-index:999;
+}
+
+@keyframes float{
+50%{
+transform:translateY(-5px);
+}
+}
+
+footer{
+padding:30px;
+text-align:center;
+opacity:.7;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
 }
 
 .hero p{
 font-size:18px;
 }
 
-.btn{
-background:#00ffc3;
-padding:12px 25px;
-border-radius:8px;
-border:none;
-cursor:pointer;
+nav{
+gap:15px;
+flex-wrap:wrap;
 }
 
-/* SERVICIOS */
-.servicios{
-padding:50px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.card{
-background:#111827;
-border-radius:10px;
-padding:20px;
-text-align:center;
-}
-
-.card img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
-
-/* PLANES */
-.planes{
-padding:50px;
-text-align:center;
-}
-
-.logo-plan{
-width:120px;
-margin-bottom:10px;
-}
-
-.plan{
-background:#111827;
-padding:20px;
-border-radius:10px;
-margin:10px;
-display:inline-block;
-width:250px;
-}
-
-.plan img{
-width:100%;
-margin-top:10px;
-border-radius:8px;
-}
-
-/* WHATSAPP */
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-z-index:999;
-}
-
-.whatsapp img{
-width:65px;
 }
 
 </style>
@@ -153,85 +449,242 @@ width:65px;
 
 <body>
 
-<!-- INTRO -->
+
 <div id="intro">
 <img src="logo.png">
 </div>
 
-<!-- HERO -->
+
+
+<nav>
+<a href="#">Inicio</a>
+<a href="#servicios">Servicios</a>
+<a href="#nosotros">Nosotros</a>
+
+<a href="portafolio-wisemaradio-streaming.pdf"
+target="_blank"
+class="pdf-btn">
+Descargar Portafolio
+</a>
+</nav>
+
+
+
 <section class="hero">
+
 <img src="logo.png">
-<h1>Streaming Profesional para Radio</h1>
-<p>Conecta tu señal con el mundo 24/7 sin interrupciones</p>
-<button class="btn">Solicitar Servicio</button>
+
+<h1>
+Conectamos tu señal con el mundo
+</h1>
+
+<p>
+Infraestructura profesional de streaming para emisoras,
+iglesias, empresas e instituciones con transmisión
+estable, monitoreo continuo y soporte especializado.
+</p>
+
+<a href="https://wa.me/573244484975"
+class="btn">
+Solicitar Asesoría
+</a>
+
 </section>
 
-<!-- SERVICIOS -->
-<section class="servicios">
+
+
+<section id="servicios" class="servicios">
 
 <div class="card">
 <img src="streaming.png">
 <h3>Streaming 24/7</h3>
-<p>Transmisión estable todo el tiempo</p>
+<p>Transmisión estable todo el tiempo.</p>
 </div>
 
 <div class="card">
 <img src="pagina.png">
 <h3>Página web incluida</h3>
-<p>Diseño profesional con reproductor</p>
+<p>Diseño profesional con reproductor.</p>
 </div>
 
 <div class="card">
 <img src="aplicacion.png">
 <h3>App Android</h3>
-<p>Tu emisora en Play Store</p>
+<p>Tu emisora en Play Store.</p>
 </div>
 
 <div class="card">
 <img src="plataforma.png">
 <h3>Presencia en plataformas</h3>
-<p>Disponible en todas las apps de radio</p>
+<p>Disponible en apps de radio.</p>
 </div>
 
 </section>
 
-<!-- PLANES -->
-<section class="planes">
 
-<img src="logosolo.png" class="logo-plan">
 
-<h2>Planes de Streaming</h2>
 
-<div class="plan">
-<h3>Básico</h3>
-<p>Streaming estable</p>
-<img src="micro.png">
+<section id="nosotros" class="section">
+
+<h2>¿Por qué elegir Wisemaradio?</h2>
+
+<div class="valores">
+
+<div class="box">
+<h3>Infraestructura dedicada</h3>
+<p>
+Servidores optimizados para transmisión
+en vivo con estabilidad, baja latencia y
+continuidad operativa para proyectos que
+requieren confiabilidad permanente.
+</p>
 </div>
 
-<div class="plan">
-<h3>Profesional</h3>
-<p>Streaming + Web</p>
-<img src="midiendo.png">
+
+<div class="box">
+<h3>Soporte técnico especializado</h3>
+<p>
+Acompañamiento personalizado, monitoreo continuo
+y asistencia técnica para garantizar operaciones
+sin interrupciones.
+</p>
 </div>
 
-<div class="plan">
-<h3>Premium</h3>
-<p>Todo incluido</p>
-<img src="premium.png">
+
+<div class="box">
+<h3>Escalabilidad</h3>
+<p>
+Soluciones que crecen con tu emisora o institución,
+adaptándose a nuevas necesidades.
+</p>
+</div>
+
+
+<div class="box">
+<h3>Seguridad y continuidad</h3>
+<p>
+Buenas prácticas operativas, redundancia
+y respaldo orientados a mantener la
+estabilidad de la transmisión.
+</p>
+</div>
+
 </div>
 
 </section>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/573244484975" class="whatsapp" target="_blank">
-<img src="WhatsApp.png">
+
+
+
+
+<section class="section">
+
+<h2>Misión, visión y valores</h2>
+
+<div class="valores">
+
+
+<div class="box">
+
+<h3>Misión</h3>
+
+<p>
+Brindar soluciones profesionales de streaming
+en vivo para emisoras, iglesias, empresas
+e instituciones con infraestructura confiable,
+monitoreo continuo y soporte técnico especializado.
+</p>
+
+</div>
+
+
+
+<div class="box">
+
+<h3>Visión</h3>
+
+<p>
+Ser referente en soluciones de transmisión
+digital e infraestructura de streaming,
+reconocidos por confiabilidad e innovación.
+</p>
+
+</div>
+
+
+
+<div class="box">
+
+<h3>Valores</h3>
+
+<ul>
+<li>Confiabilidad operativa</li>
+<li>Soporte técnico personalizado</li>
+<li>Innovación tecnológica</li>
+<li>Continuidad del servicio</li>
+<li>Compromiso con el cliente</li>
+</ul>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<section class="portafolio">
+
+<h2>Conoce nuestro portafolio corporativo</h2>
+
+<p>
+Descarga la presentación completa de servicios.
+</p>
+
+<a
+href="portafolio-wisemaradio-streaming.pdf"
+target="_blank"
+class="download">
+
+Descargar PDF
+
 </a>
 
+</section>
+
+
+
+<div class="bubble">
+💬 Escríbenos por WhatsApp
+</div>
+
+
+<a href="https://wa.me/573244484975"
+class="whatsapp"
+target="_blank">
+
+<img src="WhatsApp.png">
+
+</a>
+
+
+
+<footer>
+© WISEMARADIO Streaming Digital
+</footer>
+
+
+
 <script>
+
 setTimeout(()=>{
 document.getElementById("intro").style.display="none";
 },3000);
+
 </script>
+
 
 </body>
 </html>

@@ -102,27 +102,86 @@ footer{padding:29px 0;border-top:1px solid var(--line);color:#a2b6c9;font-size:.
 @media(max-width:700px){.container{width:calc(100% - 28px)}.notice{letter-spacing:.07em}.header{min-height:66px}.brand{font-size:.84rem}.brand img{width:36px;height:36px}nav{gap:12px}nav a{font-size:.78rem}nav .nav-cta{padding:8px 10px}nav .optional{display:none}.hero{padding:58px 0 70px}.subtitle{font-size:.94rem}.logos{gap:9px}.logo-card{flex:1 1 160px;min-width:0;padding:10px;gap:8px}.logo-card img{width:47px;height:47px}.logo-card strong{font-size:.72rem}.logo-card small{font-size:.65rem}.directory{padding:54px 0!important}.section-head{flex-direction:column;align-items:stretch}.search{min-width:0}.grid{grid-template-columns:1fr}.about-layout{grid-template-columns:1fr;gap:24px}.about{padding:55px 0}.feature{padding:14px}.footer{align-items:start;flex-direction:column}}
 @media(max-width:340px){.feature-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Refinamiento institucional noviembre 2026 */
+.intro{position:fixed;inset:0;background:#000;z-index:99999;display:flex;justify-content:center;align-items:center;animation:introLeave .25s 3s both}
+.intro img{width:220px;max-width:80vw;animation:zoomIntro 3s ease forwards}
+@keyframes zoomIntro{0%{transform:scale(.2);opacity:0}100%{transform:scale(1.6);opacity:1}}
+@keyframes introLeave{0%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+.hero{background:linear-gradient(180deg,#f3faff 0%,#daeeff 35%,#a4cdec 72%,#235d97 100%);padding:45px 0 72px;color:#183c68;min-height:auto}
+.hero:before{content:"";position:absolute;bottom:0;left:0;right:0;top:auto;height:80px;background:repeating-radial-gradient(ellipse at 50% -200px,transparent 0 15px,#4e92d21a 16px 17px,transparent 18px 24px);pointer-events:none}
+.hero:after{display:none}
+.institutional-banner{background:#ffffffb6;border:1px solid #ffffffdc;border-radius:24px;padding:22px clamp(12px,3vw,35px);display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,35px);box-shadow:0 18px 65px #234f791a}
+.army-identity{display:flex;align-items:center;gap:15px;flex:1.4;min-width:0;text-align:left}
+.army-crest{display:block;width:77px;max-height:115px;object-fit:contain;flex-shrink:0}
+.army-identity strong{display:block;font-size:clamp(1.35rem,3.4vw,2.8rem);letter-spacing:-.04em;line-height:1.01;color:#264875}
+.army-identity strong span{display:block;font-size:.61em;letter-spacing:.03em}
+.army-identity small{display:block;font-family:Georgia,serif;color:#264875;font-size:clamp(.73rem,1.45vw,1.1rem);line-height:1.3;margin-top:7px}
+.brand-rule{background:#bcd6ee;width:1px;align-self:stretch}
+.marina-identity{display:flex;align-items:center;justify-content:center;gap:15px;flex:1;min-width:0}
+.marina-identity img{width:105px;height:96px;object-fit:contain}
+.marina-identity strong{font-size:clamp(1.1rem,2.4vw,2rem);font-weight:900;color:#174672;line-height:1.15}
+.hero-copy{margin:30px auto 0;max-width:780px}
+.hero-copy .kicker{color:#1c658d}
+.hero h1{font-size:clamp(1.95rem,4.2vw,3.4rem);line-height:1.2;margin:12px auto;color:#173d69;max-width:780px}
+.hero h1 em{color:#086e91}
+.hero-copy p{max-width:650px;margin:11px auto 22px;color:#264d77;font-size:1rem}
+.hero .cta{background:#14507d;color:white;box-shadow:0 10px 32px #003b6b29}
+.directory{scroll-margin-top:20px}
+.station{padding:18px}
+.station-head{min-height:72px;gap:12px}
+.emblem{height:64px;width:64px;border-radius:12px}
+.station-name{font-size:1.09rem}
+.station-type{font-size:.59rem}
+.place{font-size:.74rem}
+.metadata{border-top:1px solid var(--line);border-bottom:none;min-height:unset;padding:15px 0 10px;margin-top:12px;gap:13px;flex:1}
+.metadata .play{display:flex;flex:0 0 54px;width:54px;height:54px;min-width:54px;padding:0;border-radius:50%;font-size:1.15rem;background:#6debd6;color:#052b34}
+.metadata .play .symbol{font-size:1.25rem;line-height:1}
+.track{flex:1;min-width:0}
+.track-name{font-size:.89rem}
+.artist{font-size:.77rem}
+.controls{border-top:1px solid var(--line);padding-top:11px;margin-top:5px}
+.status{display:flex;gap:8px;align-items:center;text-transform:uppercase;font-weight:800;letter-spacing:.08em;font-size:.67rem}
+.status .dot{width:9px;height:9px;display:inline-block;border-radius:50%;background:#71889a}
+.station.playing .status .dot{background:#fa464d;box-shadow:0 0 0 4px #fa464d21;animation:pulseLive 1.8s ease infinite}
+.station.playing .status strong{color:#fff}
+.status strong{font-size:inherit;color:#93aec5}
+@keyframes pulseLive{50%{box-shadow:0 0 0 7px #fa464d0a}}
+@media(max-width:700px){
+ .hero{padding:18px 0 45px}
+ .institutional-banner{flex-direction:column;border-radius:20px;padding:20px 14px;gap:10px}
+ .army-identity{justify-content:center;flex:unset;width:100%;max-width:380px}
+ .army-crest{height:90px;width:auto}
+ .army-identity strong{font-size:clamp(1.4rem,7vw,2.25rem)}
+ .army-identity small{font-size:.74rem}
+ .brand-rule{height:1px;width:70%;background:#b5d4eb}
+ .marina-identity{flex:unset;gap:10px}
+ .marina-identity img{width:75px;height:75px}
+ .marina-identity strong{font-size:1.45rem}
+ .hero-copy{margin-top:22px}
+}
+@media(prefers-reduced-motion:reduce){.intro{animation:introLeave .01s 0s both}.intro img{animation:none}}
 </style>
 </head>
 <body>
-<div class="notice">PROYECTO PILOTO · PRESENTACIÓN Y ESCUCHA DE SEÑALES</div>
-<header><div class="container header">
-<a href="#inicio" class="brand" aria-label="WiseMaRadio, inicio"><img src="../logosolo.png" alt="">WISEMA<b>RADIO</b></a>
-<nav aria-label="Navegación"><a href="#proyecto" class="optional">El proyecto</a><a href="#emisoras" class="nav-cta">18 emisoras</a></nav>
-</div></header>
+<div class="intro" id="intro" aria-hidden="true"><img src="../logo.png" alt=""></div>
 <main>
-<section class="hero" id="inicio"><div class="container">
-<div class="kicker">Plataforma de streaming institucional</div>
-<img class="hero-logo" src="../logo.png" alt="WiseMaRadio" fetchpriority="high">
-<h1>18 emisoras. <em>Una sola experiencia</em> de escucha.</h1>
-<p class="subtitle">Un recorrido sonoro por Colombia a través de Marina Stereo. Reúne las señales en vivo del proyecto piloto y permite verificar su reproducción desde una sola página.</p>
-<div class="logos">
-<div class="logo-card"><img src="https://www.armada.mil.co/sites/default/files/images/news/escudo_para_redes_4.jpeg" alt="Escudo Armada de Colombia"><div><strong>Armada de Colombia</strong><small>Proyecto piloto de streaming</small></div></div>
-<div class="logo-card"><img src="https://raw.githubusercontent.com/Wisemaradio/marina-carbol/main/logo.png" alt="Logo Marina Stereo"><div><strong>Marina Stereo</strong><small>18 señales en el directorio</small></div></div>
-</div>
-<a href="#emisoras" class="cta">Explorar emisoras ↓</a>
-<small class="hero-caption">Sitio público de demostración y evaluación técnica · Sin estadísticas ni acceso administrativo</small>
-</div></section>
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="institutional-banner">
+      <div class="army-identity"><img class="army-crest" src="data:image/webp;base64,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" alt="Escudo de la Armada de Colombia">
+        <div><strong>ARMADA <span>DE COLOMBIA</span></strong><small>Protegemos el azul de la bandera</small></div>
+      </div>
+      <div class="brand-rule" aria-hidden="true"></div>
+      <div class="marina-identity"><img src="https://raw.githubusercontent.com/Wisemaradio/marina-carbol/main/logo.png" alt="Marina Stereo"><strong>Marina Stereo</strong></div>
+    </div>
+    <div class="hero-copy"><div class="kicker">Proyecto piloto de streaming institucional</div>
+      <h1>Las 18 señales de <em>Marina Stereo</em> en un solo lugar</h1>
+      <p>Explora las emisoras, escucha cada señal en vivo y consulta los metadatos de su programación.</p>
+      <a href="#emisoras" class="cta">Escuchar las emisoras ↓</a>
+    </div>
+  </div>
+</section>
 <section class="directory" id="emisoras"><div class="container">
 <div class="section-head"><div><div class="kicker">Directorio de señales</div><h2>Elige tu emisora</h2><p class="subsection">Pulsa escuchar para comprobar su audio. Solo una emisora sonará a la vez. Se muestran canción, artista y carátula cuando AzuraCast proporciona esos datos.</p></div>
 <div class="search"><label for="filter">Buscar emisora o ciudad</label><input id="filter" type="search" placeholder="Ej. Corozal, Tumaco, 91.7…" autocomplete="off"></div></div>
@@ -165,40 +224,41 @@ function buildCard(s){
  const header=el("div");
  header.append(el("div","station-type","MARINA STEREO"),el("h3","station-name",s.city),el("div","place",s.region),el("span","dial",s.dial));
  top.append(logoBox,header);
- const metadata=el("div","metadata"),album=el("div","album"),art=el("img"),music=el("span","","♫");
- art.alt="Carátula de la canción";art.loading="lazy";art.addEventListener("load",()=>{art.style.display="block";music.style.display="none";});
- art.addEventListener("error",()=>{art.style.display="none";music.style.display="block";});
- album.append(art,music);
- const detail=el("div","track"),title=el("strong","track-name","Consultando metadatos…"),artist=el("span","artist","Información de AzuraCast");
- detail.append(el("span","now","SONANDO AHORA"),title,artist);metadata.append(album,detail);
- const controls=el("div","controls"),status=el("div","status"),statusStrong=el("strong","","Audio en directo");
- status.append(statusStrong,el("span","","Comprobar señal"));
- const btn=el("button","play"),symbol=el("span","symbol","▶"),label=el("span","","Escuchar");
- btn.type="button";btn.setAttribute("aria-pressed","false");btn.setAttribute("aria-label","Reproducir Marina Stereo "+s.city);btn.append(symbol,label);
+ const metadata=el("div","metadata"),detail=el("div","track"),title=el("strong","track-name","Consultando metadatos…"),artist=el("span","artist","Información de AzuraCast");
+ const btn=el("button","play"),symbol=el("span","symbol","▶");btn.type="button";
+ btn.setAttribute("aria-pressed","false");btn.setAttribute("aria-label","Reproducir Marina Stereo "+s.city);btn.title="Escuchar";
+ btn.append(symbol);
  btn.addEventListener("click",()=>toggle(s));
- controls.append(status,btn);card.append(top,metadata,controls);grid.append(card);
- cards.set(s.id,{card,logo,title,artist,art,btn,symbol,label,statusStrong});
+ detail.append(el("span","now","SONANDO AHORA"),title,artist);
+ metadata.append(btn,detail);
+ const controls=el("div","controls"),status=el("div","status"),dot=el("span","dot"),statusStrong=el("strong","","LISTO PARA ESCUCHAR");
+ status.append(dot,statusStrong);controls.append(status);card.append(top,metadata,controls);grid.append(card);
+ cards.set(s.id,{card,logo,title,artist,btn,symbol,statusStrong});
 }
 stations.forEach(buildCard);
 function buttons(){
  for(const s of stations){
   const c=cards.get(s.id),playing=active===s.id&&!audio.paused&&!audio.error;
   c.card.classList.toggle("playing",playing);c.btn.setAttribute("aria-pressed",String(playing));
-  c.btn.setAttribute("aria-label",(playing?"Pausar":"Reproducir")+" Marina Stereo "+s.city);
-  c.symbol.textContent=playing?"Ⅱ":"▶";c.label.textContent=playing?"Pausar":"Escuchar";
-  if(playing)c.statusStrong.textContent="Escuchando";
-  else if(c.statusStrong.textContent!=="No se pudo conectar")c.statusStrong.textContent="Audio en directo";
+  c.btn.setAttribute("aria-label",(playing?"Detener":"Reproducir")+" Marina Stereo "+s.city);
+  c.btn.title=playing?"Detener reproducción":"Escuchar señal";
+  c.symbol.textContent=playing?"■":"▶";
+  if(playing)c.statusStrong.textContent="EN VIVO";
+  else if(c.statusStrong.textContent!=="NO SE PUDO CONECTAR"&&c.statusStrong.textContent!=="CONECTANDO…")c.statusStrong.textContent="LISTO PARA ESCUCHAR";
  }
 }
 async function toggle(s){
- if(active===s.id&&!audio.paused){sequence++;audio.pause();buttons();announce.textContent="Reproducción pausada";return;}
+ if(active===s.id&&!audio.paused){
+  sequence++;audio.pause();audio.removeAttribute("src");audio.load();active=null;buttons();
+  announce.textContent="Reproducción detenida";return;
+ }
  const seq=++sequence;audio.pause();active=s.id;audio.src=s.url;
- cards.get(s.id).statusStrong.textContent="Conectando…";
+ cards.get(s.id).statusStrong.textContent="CONECTANDO…";buttons();
  try{await audio.play();if(seq!==sequence)return;buttons();announce.textContent="Escuchando Marina Stereo "+s.city;}
- catch(err){if(seq!==sequence)return;audio.pause();cards.get(s.id).statusStrong.textContent="No se pudo conectar";buttons();announce.textContent="No fue posible reproducir "+s.city;}
+ catch(err){if(seq!==sequence)return;audio.pause();cards.get(s.id).statusStrong.textContent="NO SE PUDO CONECTAR";buttons();announce.textContent="No fue posible reproducir "+s.city;}
 }
 audio.addEventListener("play",buttons);audio.addEventListener("pause",buttons);
-audio.addEventListener("error",()=>{if(!active)return;const c=cards.get(active);c.statusStrong.textContent="No se pudo conectar";buttons();announce.textContent="Error al reproducir la señal";});
+audio.addEventListener("error",()=>{if(!active)return;const c=cards.get(active);c.statusStrong.textContent="NO SE PUDO CONECTAR";buttons();announce.textContent="Error al reproducir la señal";});
 window.addEventListener("pagehide",()=>audio.pause());
 function httpsUrl(u){if(typeof u!=="string"||!u)return "";try{const x=new URL(u,BASE);return x.protocol==="https:"?x.href:"";}catch(e){return "";}}
 function update(entry){
@@ -209,8 +269,6 @@ function update(entry){
  const txt=typeof song.text==="string"?song.text.trim():"";
  c.title.textContent=title||txt||"Programación en vivo";
  c.artist.textContent=artist||"Sin artista informado";
- const cover=httpsUrl(song.art);
- if(cover&&c.art.src!==cover)c.art.src=cover;
  const image=httpsUrl(s.art);
  if(image&&c.logo.src!==image)c.logo.src=image;
 }
@@ -238,4 +296,5 @@ filter.addEventListener("input",()=>{
 });
 metadata();setInterval(metadata,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)metadata();});
 </script>
+<script>window.addEventListener("load",()=>{const intro=document.getElementById("intro");if(intro)setTimeout(()=>intro.remove(),3400);});</script>
 </body></html>

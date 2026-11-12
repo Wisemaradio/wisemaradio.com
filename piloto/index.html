@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07182b">
+<meta name="description" content="Portal piloto de escucha de las 18 emisoras Marina Stereo. WiseMaRadio: señales y metadatos en vivo.">
+<meta property="og:title" content="WiseMaRadio | 18 emisoras Marina Stereo">
+<meta property="og:description" content="Escucha las 18 señales de Marina Stereo y conoce la música que transmiten.">
+<meta property="og:image" content="https://wisemaradio.com/logo.png">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../favicon-192.png">
+<title>WiseMaRadio | Proyecto Marina Stereo · 18 emisoras</title>
+<style>
+:root{--bg:#061425;--panel:#10253b;--panel2:#152e48;--text:#f5faff;--muted:#afc5d9;--line:#ffffff19;--aqua:#69ecd4;--blue:#69b9fa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 "Segoe UI",Inter,system-ui,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+.container{max-width:1190px;width:calc(100% - 40px);margin:0 auto}
+.notice{font-size:.7rem;letter-spacing:.19em;text-align:center;background:#0f2d4a;border-bottom:1px solid var(--line);padding:10px 12px;color:#d5e6f5;font-weight:800}
+header{position:sticky;top:0;z-index:10;background:#071729eb;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.header{display:flex;justify-content:space-between;align-items:center;min-height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:.035em;text-decoration:none;font-size:1rem}
+.brand img{width:43px;height:43px;object-fit:contain}
+.brand b{color:var(--aqua)}
+nav{display:flex;gap:25px;align-items:center}
+nav a{text-decoration:none;font-size:.88rem;font-weight:700}
+nav a:hover{color:var(--aqua)}
+nav .nav-cta{color:#04212a;background:var(--aqua);padding:9px 16px;border-radius:10px}
+.hero{background:radial-gradient(ellipse at 50% 25%,#21456b 0,transparent 60%),linear-gradient(160deg,#09233e,#071525 75%);position:relative;text-align:center;overflow:hidden;padding:71px 0 83px}
+.hero:before,.hero:after{content:"";position:absolute;pointer-events:none;top:40%;left:50%;transform:translate(-50%,-50%);width:820px;height:820px;border:1px solid #bcd6ef0c;border-radius:50%}
+.hero:after{width:1100px;height:1100px}
+.hero .container{position:relative}
+.kicker{font-weight:800;color:var(--aqua);font-size:.73rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-logo{display:block;margin:29px auto 16px;width:min(355px,78vw);max-height:165px;object-fit:contain;filter:drop-shadow(0 12px 24px #0005)}
+h1{font-size:clamp(2.2rem,5.5vw,4.4rem);font-weight:850;line-height:1.13;letter-spacing:-.045em;margin:12px auto;max-width:950px}
+h1 em{font-style:normal;color:var(--aqua)}
+.subtitle{color:#c4d8e9;max-width:760px;margin:18px auto 0;font-size:1.05rem}
+.logos{display:flex;align-items:stretch;justify-content:center;gap:14px;flex-wrap:wrap;margin:33px auto 30px}
+.logo-card{display:flex;align-items:center;gap:13px;border:1px solid #ffffff2a;background:#ffffff0d;border-radius:17px;padding:12px 15px;min-width:220px;text-align:left}
+.logo-card img{width:62px;height:62px;object-fit:contain;background:#fff;border-radius:10px;padding:3px}
+.logo-card strong{font-size:.88rem;display:block}
+.logo-card small{font-size:.72rem;color:#b1c9db;display:block;margin-top:3px;line-height:1.4}
+.cta{display:inline-block;background:var(--aqua);color:#032529;padding:13px 24px;border-radius:11px;font-weight:850;text-decoration:none;box-shadow:0 13px 33px #23dabb24}
+.hero-caption{display:block;color:#95b0c6;margin-top:17px;font-size:.8rem}
+main section.directory{padding:77px 0 90px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:22px}
+h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.18;letter-spacing:-.03em;margin:8px 0}
+.subsection{max-width:690px;color:var(--muted);margin:0}
+.search label{display:block;font-size:.8rem;color:#b9cce0;margin-bottom:8px}
+.search{min-width:260px}
+.search input{width:100%;padding:12px 15px;color:white;background:#112941;border:1px solid #e5f6ff38;border-radius:12px;outline:none}
+.search input:focus{border-color:var(--aqua)}
+.search input::placeholder{color:#85a0b7}
+.counter{font-size:.8rem;color:#9fb9cd;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.station{display:flex;flex-direction:column;background:linear-gradient(145deg,var(--panel2),#0e2034);border:1px solid #c4e2f426;border-radius:20px;padding:22px;min-width:0;transition:transform .2s,border-color .2s;box-shadow:0 15px 40px #0002}
+.station:hover{transform:translateY(-4px);border-color:#69ecd470}
+.station.playing{border-color:var(--aqua)}
+.station[hidden]{display:none}
+.station-head{display:flex;gap:14px;align-items:center;min-height:93px}
+.emblem{width:76px;height:76px;border-radius:15px;background:#f3faff;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.emblem img{width:100%;height:100%;object-fit:contain;padding:5px}
+.emblem .fallback{font-size:2rem;display:none}
+.station-name{font-size:1.22rem;line-height:1.15;margin:2px 0 4px}
+.station-type{font-size:.65rem;color:#86a9c0;font-weight:850;letter-spacing:.14em}
+.place{color:#abc5d7;font-size:.78rem}
+.dial{display:block;color:var(--aqua);font-size:.89rem;font-weight:850;margin-top:4px}
+.metadata{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;min-height:112px;margin-top:17px;padding:16px 0}
+.album{width:65px;height:65px;flex:none;background:linear-gradient(135deg,#28547c,#17324c);border-radius:12px;display:grid;place-items:center;color:var(--aqua);font-size:1.9rem;overflow:hidden}
+.album img{width:100%;height:100%;object-fit:cover;display:none}
+.track{min-width:0;overflow-wrap:anywhere}
+.now{font-size:.65rem;font-weight:850;letter-spacing:.15em;color:#92b1c9}
+.track-name{font-size:.87rem;font-weight:800;line-height:1.35;display:block;margin:5px 0 3px}
+.artist{font-size:.78rem;color:#b3c9d9;display:block}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
+.status{font-size:.73rem;line-height:1.35;color:#afc5d6}
+.status strong{display:block;font-size:.78rem;color:#eef8ff}
+.play{background:var(--aqua);border:0;border-radius:11px;color:#03252a;font-size:.85rem;font-weight:850;display:flex;align-items:center;justify-content:center;gap:9px;min-width:121px;padding:12px}
+.play:hover{filter:brightness(1.07)}
+.play .symbol{font-size:1rem}
+.empty{text-align:center;color:var(--muted);padding:23px}
+.about{background:linear-gradient(#0b2138,#081728);border-top:1px solid var(--line);padding:75px 0}
+.about-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.about p{color:#afc5d9;line-height:1.8}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.feature{background:#ffffff0b;border:1px solid var(--line);padding:19px;border-radius:15px}
+.feature span{display:block;color:var(--aqua);font-size:1.4rem;margin-bottom:8px}
+.feature strong{display:block}
+.feature p{font-size:.82rem;line-height:1.5;margin:6px 0 0}
+footer{padding:29px 0;border-top:1px solid var(--line);color:#a2b6c9;font-size:.76rem}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer img{width:115px;max-height:58px;object-fit:contain}
+.footer p{margin:4px 0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1020px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.container{width:calc(100% - 28px)}.notice{letter-spacing:.07em}.header{min-height:66px}.brand{font-size:.84rem}.brand img{width:36px;height:36px}nav{gap:12px}nav a{font-size:.78rem}nav .nav-cta{padding:8px 10px}nav .optional{display:none}.hero{padding:58px 0 70px}.subtitle{font-size:.94rem}.logos{gap:9px}.logo-card{flex:1 1 160px;min-width:0;padding:10px;gap:8px}.logo-card img{width:47px;height:47px}.logo-card strong{font-size:.72rem}.logo-card small{font-size:.65rem}.directory{padding:54px 0!important}.section-head{flex-direction:column;align-items:stretch}.search{min-width:0}.grid{grid-template-columns:1fr}.about-layout{grid-template-columns:1fr;gap:24px}.about{padding:55px 0}.feature{padding:14px}.footer{align-items:start;flex-direction:column}}
+@media(max-width:340px){.feature-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="notice">PROYECTO PILOTO · PRESENTACIÓN Y ESCUCHA DE SEÑALES</div>
+<header><div class="container header">
+<a href="#inicio" class="brand" aria-label="WiseMaRadio, inicio"><img src="../logosolo.png" alt="">WISEMA<b>RADIO</b></a>
+<nav aria-label="Navegación"><a href="#proyecto" class="optional">El proyecto</a><a href="#emisoras" class="nav-cta">18 emisoras</a></nav>
+</div></header>
+<main>
+<section class="hero" id="inicio"><div class="container">
+<div class="kicker">Plataforma de streaming institucional</div>
+<img class="hero-logo" src="../logo.png" alt="WiseMaRadio" fetchpriority="high">
+<h1>18 emisoras. <em>Una sola experiencia</em> de escucha.</h1>
+<p class="subtitle">Un recorrido sonoro por Colombia a través de Marina Stereo. Reúne las señales en vivo del proyecto piloto y permite verificar su reproducción desde una sola página.</p>
+<div class="logos">
+<div class="logo-card"><img src="https://www.armada.mil.co/sites/default/files/images/news/escudo_para_redes_4.jpeg" alt="Escudo Armada de Colombia"><div><strong>Armada de Colombia</strong><small>Proyecto piloto de streaming</small></div></div>
+<div class="logo-card"><img src="https://raw.githubusercontent.com/Wisemaradio/marina-carbol/main/logo.png" alt="Logo Marina Stereo"><div><strong>Marina Stereo</strong><small>18 señales en el directorio</small></div></div>
+</div>
+<a href="#emisoras" class="cta">Explorar emisoras ↓</a>
+<small class="hero-caption">Sitio público de demostración y evaluación técnica · Sin estadísticas ni acceso administrativo</small>
+</div></section>
+<section class="directory" id="emisoras"><div class="container">
+<div class="section-head"><div><div class="kicker">Directorio de señales</div><h2>Elige tu emisora</h2><p class="subsection">Pulsa escuchar para comprobar su audio. Solo una emisora sonará a la vez. Se muestran canción, artista y carátula cuando AzuraCast proporciona esos datos.</p></div>
+<div class="search"><label for="filter">Buscar emisora o ciudad</label><input id="filter" type="search" placeholder="Ej. Corozal, Tumaco, 91.7…" autocomplete="off"></div></div>
+<p class="counter" id="count">18 emisoras en el directorio</p><div class="grid" id="stations"></div>
+<p id="empty" class="empty" hidden>No se encontraron emisoras.</p>
+<noscript>Activa JavaScript para utilizar los reproductores y consultar metadatos.</noscript>
+<div id="announcement" role="status" aria-live="polite" class="sr-only"></div>
+</div></section>
+<section class="about" id="proyecto"><div class="container about-layout">
+<div><div class="kicker">El proyecto</div><h2>Conectando las voces de Marina Stereo</h2><p>Esta plataforma pública presenta las 18 señales integradas en el piloto de streaming y facilita una prueba sencilla: entrar, reproducir y escuchar cada estación.</p><p>El audio y los metadatos llegan desde AzuraCast. Las métricas y la administración técnica permanecen exclusivamente en su panel.</p></div>
+<div class="feature-grid"><div class="feature"><span>◉</span><strong>18 señales</strong><p>Identificadas por ciudad y frecuencia.</p></div><div class="feature"><span>▶</span><strong>Escucha directa</strong><p>Una emisora a la vez, sin volumen adicional.</p></div><div class="feature"><span>♫</span><strong>Metadatos</strong><p>Canción, artista y carátula disponibles.</p></div><div class="feature"><span>⌁</span><strong>Acceso público</strong><p>Diseño adaptable para móvil y escritorio.</p></div></div>
+</div></section>
+</main>
+<footer><div class="container footer"><img src="../logo.png" alt="WiseMaRadio"><div><p>© 2026 WiseMaRadio · Portal piloto Marina Stereo.</p><p>La reproducción depende de la disponibilidad de cada señal. Esta web no constituye un panel de supervisión automática.</p></div></div></footer>
+<script>
+"use strict";
+const BASE="https://stream.wisemaradio.com";
+const DEFAULT_LOGO="https://raw.githubusercontent.com/Wisemaradio/marina-carbol/main/logo.png";
+const stations=[
+["marina-malagana","Malagana","Bolívar","101.9 FM"],["marina-carbol","El Carmen de Bolívar","Bolívar","91.7 FM"],
+["marina-bahia-malaga","Bahía Málaga","Valle del Cauca","102.1 FM"],["marina-buenaventura","Buenaventura","Valle del Cauca","105.9 FM"],
+["marina-barranquilla","Barranquilla","Atlántico","90.7 FM"],["marina-arauca","Arauca","Arauca","89.3 FM"],
+["marina-turbo","Turbo","Antioquia","98.9 FM"],["marina-bahia-solano","Bahía Solano","Chocó","102.3 FM"],
+["marina-magangue","Magangué","Bolívar","102.5 FM"],["marina-puerto-lopez","Puerto López","Meta","98.1 FM"],
+["marina-corozal","Corozal","Sucre","99.8 FM"],["marina-puerto-leguizamo","Puerto Leguízamo","Putumayo","99.3 FM"],
+["marina-san-andres","San Andrés","San Andrés y Providencia","94.5 FM"],["marina-inirida","Inírida","Guainía","94.1 FM"],
+["marina-tumaco","Tumaco","Nariño","92.9 FM"],["marina-guapi","Guapi","Cauca","100.9 FM"],
+["marina-covenas","Coveñas","Sucre","95.3 FM"],["marina-bogota","Bogotá","Bogotá D. C.","Online"]
+].map(([id,city,region,dial])=>({id,city,region,dial,url:BASE+"/listen/"+id+"/radio.mp3"}));
+const cards=new Map(),grid=document.getElementById("stations"),announce=document.getElementById("announcement");
+const audio=new Audio();audio.preload="none";
+let active=null,sequence=0;
+function el(tag,className,txt){const e=document.createElement(tag);if(className)e.className=className;if(txt!==undefined)e.textContent=txt;return e;}
+function buildCard(s){
+ const card=el("article","station"),top=el("div","station-head"),logoBox=el("div","emblem");
+ const logo=el("img");logo.src=DEFAULT_LOGO;logo.alt="Logo Marina Stereo "+s.city;logo.loading="lazy";
+ const fallback=el("span","fallback","⚓");fallback.setAttribute("aria-hidden","true");
+ logo.addEventListener("error",()=>{logo.style.display="none";fallback.style.display="block";});
+ logoBox.append(logo,fallback);
+ const header=el("div");
+ header.append(el("div","station-type","MARINA STEREO"),el("h3","station-name",s.city),el("div","place",s.region),el("span","dial",s.dial));
+ top.append(logoBox,header);
+ const metadata=el("div","metadata"),album=el("div","album"),art=el("img"),music=el("span","","♫");
+ art.alt="Carátula de la canción";art.loading="lazy";art.addEventListener("load",()=>{art.style.display="block";music.style.display="none";});
+ art.addEventListener("error",()=>{art.style.display="none";music.style.display="block";});
+ album.append(art,music);
+ const detail=el("div","track"),title=el("strong","track-name","Consultando metadatos…"),artist=el("span","artist","Información de AzuraCast");
+ detail.append(el("span","now","SONANDO AHORA"),title,artist);metadata.append(album,detail);
+ const controls=el("div","controls"),status=el("div","status"),statusStrong=el("strong","","Audio en directo");
+ status.append(statusStrong,el("span","","Comprobar señal"));
+ const btn=el("button","play"),symbol=el("span","symbol","▶"),label=el("span","","Escuchar");
+ btn.type="button";btn.setAttribute("aria-pressed","false");btn.setAttribute("aria-label","Reproducir Marina Stereo "+s.city);btn.append(symbol,label);
+ btn.addEventListener("click",()=>toggle(s));
+ controls.append(status,btn);card.append(top,metadata,controls);grid.append(card);
+ cards.set(s.id,{card,logo,title,artist,art,btn,symbol,label,statusStrong});
+}
+stations.forEach(buildCard);
+function buttons(){
+ for(const s of stations){
+  const c=cards.get(s.id),playing=active===s.id&&!audio.paused&&!audio.error;
+  c.card.classList.toggle("playing",playing);c.btn.setAttribute("aria-pressed",String(playing));
+  c.btn.setAttribute("aria-label",(playing?"Pausar":"Reproducir")+" Marina Stereo "+s.city);
+  c.symbol.textContent=playing?"Ⅱ":"▶";c.label.textContent=playing?"Pausar":"Escuchar";
+  if(playing)c.statusStrong.textContent="Escuchando";
+  else if(c.statusStrong.textContent!=="No se pudo conectar")c.statusStrong.textContent="Audio en directo";
+ }
+}
+async function toggle(s){
+ if(active===s.id&&!audio.paused){sequence++;audio.pause();buttons();announce.textContent="Reproducción pausada";return;}
+ const seq=++sequence;audio.pause();active=s.id;audio.src=s.url;
+ cards.get(s.id).statusStrong.textContent="Conectando…";
+ try{await audio.play();if(seq!==sequence)return;buttons();announce.textContent="Escuchando Marina Stereo "+s.city;}
+ catch(err){if(seq!==sequence)return;audio.pause();cards.get(s.id).statusStrong.textContent="No se pudo conectar";buttons();announce.textContent="No fue posible reproducir "+s.city;}
+}
+audio.addEventListener("play",buttons);audio.addEventListener("pause",buttons);
+audio.addEventListener("error",()=>{if(!active)return;const c=cards.get(active);c.statusStrong.textContent="No se pudo conectar";buttons();announce.textContent="Error al reproducir la señal";});
+window.addEventListener("pagehide",()=>audio.pause());
+function httpsUrl(u){if(typeof u!=="string"||!u)return "";try{const x=new URL(u,BASE);return x.protocol==="https:"?x.href:"";}catch(e){return "";}}
+function update(entry){
+ const s=entry&&entry.station;if(!s||!cards.has(s.shortcode))return;
+ const c=cards.get(s.shortcode),song=entry.now_playing&&entry.now_playing.song||{};
+ const title=typeof song.title==="string"?song.title.trim():"";
+ const artist=typeof song.artist==="string"?song.artist.trim():"";
+ const txt=typeof song.text==="string"?song.text.trim():"";
+ c.title.textContent=title||txt||"Programación en vivo";
+ c.artist.textContent=artist||"Sin artista informado";
+ const cover=httpsUrl(song.art);
+ if(cover&&c.art.src!==cover)c.art.src=cover;
+ const image=httpsUrl(s.art);
+ if(image&&c.logo.src!==image)c.logo.src=image;
+}
+let busy=false;
+async function metadata(){
+ if(busy||document.hidden)return;
+ busy=true;const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+ try{
+  const resp=await fetch(BASE+"/api/nowplaying",{signal:controller.signal,cache:"no-store",headers:{Accept:"application/json"}});
+  if(!resp.ok)throw new Error("HTTP "+resp.status);
+  const list=await resp.json();if(!Array.isArray(list))throw new Error("Formato API");
+  const ids=new Set();
+  list.forEach(item=>{if(item&&item.station)ids.add(item.station.shortcode);update(item);});
+  stations.forEach(s=>{if(!ids.has(s.id)){const c=cards.get(s.id);c.title.textContent="Metadatos no disponibles";c.artist.textContent="Puedes intentar escuchar la señal";}});
+ }catch(err){stations.forEach(s=>{const c=cards.get(s.id);if(c.title.textContent==="Consultando metadatos…"){c.title.textContent="Metadatos no disponibles";c.artist.textContent="Puedes intentar escuchar la señal";}});}
+ finally{clearTimeout(timer);busy=false;}
+}
+const filter=document.getElementById("filter");
+function normalize(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+filter.addEventListener("input",()=>{
+ const query=normalize(filter.value.trim());let count=0;
+ stations.forEach(s=>{const matched=normalize(s.city+" "+s.region+" "+s.dial+" Marina Stereo").includes(query);cards.get(s.id).card.hidden=!matched;if(matched)count++;});
+ document.getElementById("count").textContent=count+" de 18 emisoras";
+ document.getElementById("empty").hidden=count!==0;
+});
+metadata();setInterval(metadata,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)metadata();});
+</script>
+</body></html>

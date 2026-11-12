@@ -161,6 +161,14 @@ footer{padding:29px 0;border-top:1px solid var(--line);color:#a2b6c9;font-size:.
  .hero-copy{margin-top:22px}
 }
 @media(prefers-reduced-motion:reduce){.intro{animation:introLeave .01s 0s both}.intro img{animation:none}}
+
+/* Diagnóstico de reproducción sin exponer datos administrativos */
+.controls{flex-wrap:wrap;gap:6px 10px}
+.play-error{width:100%;color:#ffd1ce;font-size:.73rem;line-height:1.4;text-transform:none;font-weight:400}
+.open-stream{font-size:.75rem;color:#8ee8df;text-decoration:underline;text-underline-offset:3px}
+[hidden]{display:none!important}
+.station.loading{border-color:#8bd2ef70}
+.station.loading .status .dot{background:#efba48}
 </style>
 </head>
 <body>
@@ -212,8 +220,9 @@ const stations=[
 ["marina-covenas","Coveñas","Sucre","95.3 FM"],["marina-bogota","Bogotá","Bogotá D. C.","Online"]
 ].map(([id,city,region,dial])=>({id,city,region,dial,url:BASE+"/listen/"+id+"/radio.mp3"}));
 const cards=new Map(),grid=document.getElementById("stations"),announce=document.getElementById("announcement");
-const audio=new Audio();audio.preload="none";
-let active=null,sequence=0;
+const audio=new Audio();audio.preload="none";audio.volume=1;audio.muted=false;
+let active=null,sequence=0,playerState="idle",playerTimer=null;
+function clearPlayerTimer(){if(playerTimer!==null){clearTimeout(playerTimer);playerTimer=null;}}
 function el(tag,className,txt){const e=document.createElement(tag);if(className)e.className=className;if(txt!==undefined)e.textContent=txt;return e;}
 function buildCard(s){
  const card=el("article","station"),top=el("div","station-head"),logoBox=el("div","emblem");
@@ -232,34 +241,89 @@ function buildCard(s){
  detail.append(el("span","now","SONANDO AHORA"),title,artist);
  metadata.append(btn,detail);
  const controls=el("div","controls"),status=el("div","status"),dot=el("span","dot"),statusStrong=el("strong","","LISTO PARA ESCUCHAR");
- status.append(dot,statusStrong);controls.append(status);card.append(top,metadata,controls);grid.append(card);
- cards.set(s.id,{card,logo,title,artist,btn,symbol,statusStrong});
+ const issue=el("small","play-error",""),open=el("a","open-stream","Probar señal directamente ↗");
+ open.href=s.url;open.target="_blank";open.rel="noopener noreferrer";open.hidden=true;
+ status.append(dot,statusStrong);controls.append(status,issue,open);card.append(top,metadata,controls);grid.append(card);
+ cards.set(s.id,{card,logo,title,artist,btn,symbol,statusStrong,issue,open});
 }
 stations.forEach(buildCard);
-function buttons(){
+function showPlayer(){
  for(const s of stations){
-  const c=cards.get(s.id),playing=active===s.id&&!audio.paused&&!audio.error;
-  c.card.classList.toggle("playing",playing);c.btn.setAttribute("aria-pressed",String(playing));
-  c.btn.setAttribute("aria-label",(playing?"Detener":"Reproducir")+" Marina Stereo "+s.city);
-  c.btn.title=playing?"Detener reproducción":"Escuchar señal";
-  c.symbol.textContent=playing?"■":"▶";
-  if(playing)c.statusStrong.textContent="EN VIVO";
-  else if(c.statusStrong.textContent!=="NO SE PUDO CONECTAR"&&c.statusStrong.textContent!=="CONECTANDO…")c.statusStrong.textContent="LISTO PARA ESCUCHAR";
+  const c=cards.get(s.id),selected=active===s.id;
+  const loading=selected&&(playerState==="loading"||playerState==="buffering");
+  const playing=selected&&playerState==="playing";
+  const engaged=playing||loading;
+  c.card.classList.toggle("playing",playing);
+  c.card.classList.toggle("loading",loading);
+  c.btn.setAttribute("aria-pressed",String(engaged));
+  c.btn.setAttribute("aria-label",(engaged?"Detener":"Reproducir")+" Marina Stereo "+s.city);
+  c.btn.title=engaged?"Detener reproducción":"Escuchar señal";
+  c.symbol.textContent=engaged?"■":"▶";
+  c.statusStrong.textContent=playing?"EN VIVO":loading?(playerState==="buffering"?"CARGANDO AUDIO…":"CONECTANDO…"):selected&&playerState==="error"?"NO SE PUDO REPRODUCIR":"LISTO PARA ESCUCHAR";
+  c.issue.hidden=!(selected&&playerState==="error");
+  c.open.hidden=!(selected&&playerState==="error");
+  if(!selected)c.issue.textContent="";
  }
 }
-async function toggle(s){
- if(active===s.id&&!audio.paused){
-  sequence++;audio.pause();audio.removeAttribute("src");audio.load();active=null;buttons();
-  announce.textContent="Reproducción detenida";return;
- }
- const seq=++sequence;audio.pause();active=s.id;audio.src=s.url;
- cards.get(s.id).statusStrong.textContent="CONECTANDO…";buttons();
- try{await audio.play();if(seq!==sequence)return;buttons();announce.textContent="Escuchando Marina Stereo "+s.city;}
- catch(err){if(seq!==sequence)return;audio.pause();cards.get(s.id).statusStrong.textContent="NO SE PUDO CONECTAR";buttons();announce.textContent="No fue posible reproducir "+s.city;}
+function failPlayback(message){
+ if(!active)return;
+ clearPlayerTimer();playerState="error";
+ const c=cards.get(active);
+ c.issue.textContent=message;
+ audio.pause();
+ showPlayer();
+ announce.textContent="Error de audio en Marina Stereo "+stations.find(s=>s.id===active)?.city+": "+message;
 }
-audio.addEventListener("play",buttons);audio.addEventListener("pause",buttons);
-audio.addEventListener("error",()=>{if(!active)return;const c=cards.get(active);c.statusStrong.textContent="NO SE PUDO CONECTAR";buttons();announce.textContent="Error al reproducir la señal";});
-window.addEventListener("pagehide",()=>audio.pause());
+function stopPlayback(){
+ sequence++;clearPlayerTimer();
+ active=null;playerState="idle";
+ audio.pause();audio.removeAttribute("src");audio.load();
+ showPlayer();
+ announce.textContent="Reproducción detenida";
+}
+function toggle(s){
+ if(active===s.id&&(playerState==="playing"||playerState==="loading"||playerState==="buffering")){
+  stopPlayback();return;
+ }
+ sequence++;clearPlayerTimer();
+ audio.pause();audio.removeAttribute("src");audio.load();
+ active=s.id;playerState="loading";showPlayer();
+ // .play() se ejecuta directamente desde el clic del usuario, sin esperar solicitudes API.
+ audio.src=s.url;
+ const current=sequence;
+ playerTimer=setTimeout(()=>{
+  if(current===sequence&&active===s.id&&playerState!=="playing"){
+   failPlayback("La señal no entregó audio en 20 segundos. Prueba el enlace directo.");
+  }
+ },20000);
+ audio.play().catch(err=>{
+  if(current!==sequence||active!==s.id)return;
+  const message=err?.name==="NotAllowedError"
+   ?"El navegador bloqueó la reproducción. Vuelve a pulsar el botón."
+   :err?.name==="NotSupportedError"
+   ?"El navegador no reconoce el audio recibido."
+   :"No se pudo iniciar el audio: "+(err?.message||"error desconocido");
+  failPlayback(message);
+ });
+}
+audio.addEventListener("playing",()=>{
+ if(!active)return;
+ clearPlayerTimer();playerState="playing";showPlayer();
+ announce.textContent="Reproduciendo Marina Stereo "+stations.find(s=>s.id===active)?.city;
+});
+audio.addEventListener("waiting",()=>{
+ if(active&&playerState==="playing"){playerState="buffering";showPlayer();}
+});
+audio.addEventListener("stalled",()=>{
+ if(active&&playerState==="playing"){playerState="buffering";showPlayer();}
+});
+audio.addEventListener("error",()=>{
+ if(!active)return;
+ const errors={1:"La carga de audio fue interrumpida.",2:"Error de red al conectar con la señal.",3:"El navegador no pudo decodificar el audio MP3.",4:"La dirección no entrega audio compatible."};
+ failPlayback(errors[audio.error?.code]||"El servidor no respondió con un audio reproducible.");
+});
+audio.addEventListener("ended",()=>{if(active)failPlayback("La transmisión se interrumpió.");});
+window.addEventListener("pagehide",()=>{clearPlayerTimer();audio.pause();});
 function httpsUrl(u){if(typeof u!=="string"||!u)return "";try{const x=new URL(u,BASE);return x.protocol==="https:"?x.href:"";}catch(e){return "";}}
 function update(entry){
  const s=entry&&entry.station;if(!s||!cards.has(s.shortcode))return;

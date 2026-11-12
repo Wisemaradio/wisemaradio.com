@@ -204,6 +204,7 @@ footer{padding:29px 0;border-top:1px solid var(--line);color:#a2b6c9;font-size:.
 </div></section>
 </main>
 <footer><div class="container footer"><img src="../logo.png" alt="WiseMaRadio"><div><p>© 2026 WiseMaRadio · Portal piloto Marina Stereo.</p><p>La reproducción depende de la disponibilidad de cada señal. Esta web no constituye un panel de supervisión automática.</p></div></div></footer>
+<audio id="radio-signal" preload="none" playsinline style="display:none"></audio>
 <script>
 "use strict";
 const BASE="https://stream.wisemaradio.com";
@@ -220,7 +221,7 @@ const stations=[
 ["marina-covenas","Coveñas","Sucre","95.3 FM"],["marina-bogota","Bogotá","Bogotá D. C.","Online"]
 ].map(([id,city,region,dial])=>({id,city,region,dial,url:BASE+"/listen/"+id+"/radio.mp3"}));
 const cards=new Map(),grid=document.getElementById("stations"),announce=document.getElementById("announcement");
-const audio=new Audio();audio.preload="none";audio.volume=1;audio.muted=false;
+const audio=document.getElementById("radio-signal");audio.volume=1;audio.muted=false;
 let active=null,sequence=0,playerState="idle",playerTimer=null;
 function clearPlayerTimer(){if(playerTimer!==null){clearTimeout(playerTimer);playerTimer=null;}}
 function el(tag,className,txt){const e=document.createElement(tag);if(className)e.className=className;if(txt!==undefined)e.textContent=txt;return e;}
@@ -276,6 +277,7 @@ function failPlayback(message){
 }
 function stopPlayback(){
  sequence++;clearPlayerTimer();
+ // Primero anular la emisora activa para ignorar eventos tardíos del elemento.
  active=null;playerState="idle";
  audio.pause();audio.removeAttribute("src");audio.load();
  showPlayer();
@@ -286,23 +288,34 @@ function toggle(s){
   stopPlayback();return;
  }
  sequence++;clearPlayerTimer();
- audio.pause();audio.removeAttribute("src");audio.load();
- active=s.id;playerState="loading";showPlayer();
- // .play() se ejecuta directamente desde el clic del usuario, sin esperar solicitudes API.
- audio.src=s.url;
+ // Cambiar directamente la fuente: nunca hacer load() con fuente vacía
+ // mientras el navegador prepara un nuevo stream.
+ audio.pause();
+ active=s.id;playerState="loading";
+ const card=cards.get(s.id);
+ card.issue.textContent="";
+ showPlayer();
  const current=sequence;
+ audio.src=s.url;
+ audio.load();
  playerTimer=setTimeout(()=>{
   if(current===sequence&&active===s.id&&playerState!=="playing"){
    failPlayback("La señal no entregó audio en 20 segundos. Prueba el enlace directo.");
   }
  },20000);
- audio.play().catch(err=>{
+ // Mismo mecanismo de las páginas individuales Marina Stereo: play() desde el clic.
+ audio.play().then(()=>{
+  if(current!==sequence)return;
+  if(audio.readyState>=3&&!audio.paused){
+   playerState="playing";clearPlayerTimer();showPlayer();
+  }
+ }).catch(err=>{
   if(current!==sequence||active!==s.id)return;
   const message=err?.name==="NotAllowedError"
    ?"El navegador bloqueó la reproducción. Vuelve a pulsar el botón."
    :err?.name==="NotSupportedError"
    ?"El navegador no reconoce el audio recibido."
-   :"No se pudo iniciar el audio: "+(err?.message||"error desconocido");
+   :"Error al iniciar: "+(err?.name||"desconocido")+" — "+(err?.message||"");
   failPlayback(message);
  });
 }
